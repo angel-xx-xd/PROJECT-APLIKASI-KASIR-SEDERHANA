@@ -1,61 +1,227 @@
-const ProductModel = require("../models/Product");
-const CategoryModel = require("../models/Category");
+const Product = require("../models/Product");
 
-// ==================== VALIDATION ====================
+// ==================== VALIDASI ====================
 
-function validateProduct(nama_produk, category_id, harga, stok) {
+function validasiProduk(category_id, nama_produk, harga, stok) {
+
     const pesanError = [];
+
+    if (!category_id || category_id.trim() === "") {
+        pesanError.push("Kategori harus dipilih");
+    }
 
     if (!nama_produk || nama_produk.trim() === "") {
         pesanError.push("Nama produk tidak boleh kosong");
     }
 
-    if (!category_id) {
-        pesanError.push("Kategori harus dipilih");
+    if (!harga || harga.trim() === "") {
+        pesanError.push("Harga tidak boleh kosong");
     }
 
-    if (!harga || parseInt(harga) <= 0) {
-        pesanError.push("Harga tidak valid");
+    if (isNaN(harga) || Number(harga) <= 0) {
+        pesanError.push("Harga harus berupa angka dan lebih dari 0");
     }
 
-    if (!stok || parseInt(stok) < 0) {
+    if (!stok || stok.trim() === "") {
+        pesanError.push("Stok tidak boleh kosong");
+    }
+
+    if (isNaN(stok) || Number(stok) < 0) {
         pesanError.push("Stok tidak valid");
     }
 
     return pesanError;
-}
-
-// ==================== CRUD ====================
-
-function listProduct(req, res) {
 
 }
+
+// ==================== LIST ====================
+
+function list(req, res) {
+
+    const products = Product.ambilSemuaProduk();
+
+    res.render("pages/product/list", {
+        title: "Produk",
+        products
+    });
+
+}
+
+// ==================== FORM TAMBAH ====================
 
 function showCreateForm(req, res) {
 
+    const categories = Product.ambilSemuaKategori();
+
+    res.render("pages/product/create", {
+        title: "Tambah Produk",
+        categories,
+        formData: {},
+        pesanError: []
+    });
+
 }
 
-function createProduct(req, res) {
+// ==================== TAMBAH ====================
+
+function create(req, res) {
+
+    const {
+        category_id,
+        nama_produk,
+        harga,
+        stok
+    } = req.body;
+
+    const pesanError = validasiProduk(
+        category_id,
+        nama_produk,
+        harga,
+        stok
+    );
+
+    if (pesanError.length > 0) {
+
+        const categories = Product.ambilSemuaKategori();
+
+        return res.render("pages/product/create", {
+
+            pesanError,
+
+            categories,
+
+            formData: {
+                category_id,
+                nama_produk,
+                harga,
+                stok
+            }
+
+        });
+
+    }
+
+    Product.tambahProduk(
+        category_id,
+        nama_produk,
+        harga,
+        stok
+    );
+
+    res.redirect("/product/list");
 
 }
+
+// ==================== FORM EDIT ====================
 
 function showEditForm(req, res) {
 
+    const product = Product.ambilProdukById(req.params.id);
+
+    const categories = Product.ambilSemuaKategori();
+
+    res.render("pages/product/edit", {
+
+        title: "Edit Produk",
+
+        product,
+
+        categories,
+
+        pesanError: [],
+
+        formData: {}
+
+    });
+
 }
 
-function editProduct(req, res) {
+// ==================== UPDATE ====================
+
+function edit(req, res) {
+
+    const {
+        category_id,
+        nama_produk,
+        harga,
+        stok
+    } = req.body;
+
+    const pesanError = validasiProduk(
+        category_id,
+        nama_produk,
+        harga,
+        stok
+    );
+
+    if (pesanError.length > 0) {
+
+        const categories = Product.ambilSemuaKategori();
+
+        return res.render("pages/product/edit", {
+
+            categories,
+
+            pesanError,
+
+            product: {
+
+                id: req.params.id,
+
+                category_id,
+
+                nama_produk,
+
+                harga,
+
+                stok
+
+            }
+
+        });
+
+    }
+
+    Product.updateProduk(
+
+        req.params.id,
+
+        category_id,
+
+        nama_produk,
+
+        harga,
+
+        stok
+
+    );
+
+    res.redirect("/product/list");
 
 }
 
-function deleteProduct(req, res) {
+// ==================== DELETE ====================
+
+function hapus(req, res) {
+
+    Product.hapusProduk(req.params.id);
+
+    res.redirect("/product/list");
 
 }
 
 module.exports = {
-    listProduct,
+
+    list,
+
     showCreateForm,
-    createProduct,
+
+    create,
+
     showEditForm,
-    editProduct,
-    deleteProduct
+
+    edit,
+
+    hapus
+
 };

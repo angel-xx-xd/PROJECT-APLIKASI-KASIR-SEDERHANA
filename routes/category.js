@@ -1,18 +1,55 @@
 const express = require("express");
+
 const router = express.Router();
 
 const CategoryController = require("../controllers/CategoryController");
 
-router.get("/", CategoryController.index);
+const {
+    isAuthenticated
+} = require("../middlewares/authMiddleware");
 
-router.get("/create", CategoryController.create);
+// ==================== LIST ====================
 
-router.post("/store", CategoryController.store);
+router.get(
+    "/list",
+    isAuthenticated,
+    CategoryController.list
+);
 
-router.get("/edit/:id", CategoryController.edit);
+// ==================== CREATE ====================
 
-router.post("/update/:id", CategoryController.update);
+router.get(
+    "/create",
+    isAuthenticated,
+    CategoryController.showCreateForm
+);
 
-router.get("/delete/:id", CategoryController.destroy);
+router.post(
+    "/create",
+    isAuthenticated,
+    CategoryController.create
+);
+
+// ==================== EDIT ====================
+
+router.get(
+    "/edit/:id",
+    isAuthenticated,
+    CategoryController.showEditForm
+);
+
+router.post(
+    "/edit/:id",
+    isAuthenticated,
+    CategoryController.edit
+);
+
+// ==================== DELETE ====================
+
+router.get(
+    "/delete/:id",
+    isAuthenticated,
+    CategoryController.hapus
+);
 
 module.exports = router;

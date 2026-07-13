@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Data Transaksi</h2>
+
+    <a
+        href="/transaction/create"
+        class="btn btn-primary">
+
+        Transaksi Baru
+
+    </a>
+
+</div>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>No</th>
+
+            <th>Tanggal</th>
+
+            <th>Kasir</th>
+
+            <th>Total</th>
+
+            <th>Aksi</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {{#each transactions}}
+
+        <tr>
+
+            <td>{{inc @index}}</td>
+
+            <td>{{tanggal}}</td>
+
+            <td>{{nama}}</td>
+
+            <td>Rp {{total}}</td>
+
+            <td>
+
+                <a
+                    href="/transaction/detail/{{id}}"
+                    class="btn btn-info btn-sm">
+
+                    Detail
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+
+</table>

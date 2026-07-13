@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h1>Data Kategori</h1>
+
+    <a
+        href="/category/create"
+        class="btn btn-primary">
+
+        Tambah Kategori
+
+    </a>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th width="60">No</th>
+
+            <th>Nama Kategori</th>
+
+            <th>Dibuat</th>
+
+            <th width="170">Aksi</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {{#each categories}}
+
+        <tr>
+
+            <td>{{inc @index}}</td>
+
+            <td>{{nama_kategori}}</td>
+
+            <td>{{created_at}}</td>
+
+            <td>
+
+                <a
+                    href="/category/edit/{{id}}"
+                    class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <a
+                    href="/category/delete/{{id}}"
+                    class="btn btn-danger btn-sm"
+                    onclick="return confirm('Yakin ingin menghapus kategori ini?')">
+
+                    Hapus
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+
+</table>

@@ -1,49 +1,78 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5">
 
-    <div class="col-md-4">
+    <div class="col-md-5">
 
-        <div class="card">
+        <div class="card shadow">
 
             <div class="card-header text-center">
-                <h3>Login Aplikasi Kasir</h3>
+
+                <h3>
+                    Aplikasi Kasir Sederhana
+                </h3>
+
+                <p class="text-muted mb-0">
+                    Silakan Login
+                </p>
+
             </div>
 
             <div class="card-body">
 
-                {{#if error}}
+                {{#if pesanError.length}}
+
                 <div class="alert alert-danger">
-                    {{error}}
+
+                    <ul class="mb-0">
+
+                        {{#each pesanError}}
+
+                        <li>{{this}}</li>
+
+                        {{/each}}
+
+                    </ul>
+
                 </div>
+
                 {{/if}}
 
                 <form action="/auth/login" method="POST">
 
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
+
+                        <label class="form-label">
+                            Email
+                        </label>
 
                         <input
                             type="email"
                             name="email"
                             class="form-control"
-                            placeholder="Masukkan Email"
-                            required>
+                            value="{{formData.email}}"
+                            placeholder="Masukkan Email">
+
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Password
+                        </label>
 
                         <input
                             type="password"
                             name="password"
                             class="form-control"
-                            placeholder="Masukkan Password"
-                            required>
+                            placeholder="Masukkan Password">
+
                     </div>
 
                     <button
                         type="submit"
                         class="btn btn-primary w-100">
+
                         Login
+
                     </button>
 
                 </form>

@@ -1,18 +1,18 @@
 const express = require("express");
+
 const router = express.Router();
 
 const ProductController = require("../controllers/ProductController");
+const { isAuthenticated } = require("../middlewares/authMiddleware");
 
-router.get("/", ProductController.index);
+router.get("/list", isAuthenticated, ProductController.list);
 
-router.get("/create", ProductController.create);
+router.get("/create", isAuthenticated, ProductController.showCreateForm);
+router.post("/create", isAuthenticated, ProductController.create);
 
-router.post("/store", ProductController.store);
+router.get("/edit/:id", isAuthenticated, ProductController.showEditForm);
+router.post("/edit/:id", isAuthenticated, ProductController.edit);
 
-router.get("/edit/:id", ProductController.edit);
-
-router.post("/update/:id", ProductController.update);
-
-router.get("/delete/:id", ProductController.destroy);
+router.get("/delete/:id", isAuthenticated, ProductController.hapus);
 
 module.exports = router;

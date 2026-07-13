@@ -1,0 +1,60 @@
+<h1 class="mb-4">
+
+    Edit Kategori
+
+</h1>
+
+{{#if pesanError.length}}
+
+<div class="alert alert-danger">
+
+    <ul class="mb-0">
+
+        {{#each pesanError}}
+
+        <li>{{this}}</li>
+
+        {{/each}}
+
+    </ul>
+
+</div>
+
+{{/if}}
+
+<form
+    action="/category/edit/{{category.id}}"
+    method="POST">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Nama Kategori
+
+        </label>
+
+        <input
+            type="text"
+            name="nama_kategori"
+            class="form-control"
+            value="{{category.nama_kategori}}">
+
+    </div>
+
+    <button
+        class="btn btn-primary">
+
+        Update
+
+    </button>
+
+    <a
+        href="/category/list"
+        class="btn btn-secondary">
+
+        Kembali
+
+    </a>
+
+</form>

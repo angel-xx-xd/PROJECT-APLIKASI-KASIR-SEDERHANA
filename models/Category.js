@@ -1,46 +1,84 @@
 const db = require("../database/config");
 
-function getAllCategory() {
+// ==================== AMBIL SEMUA ====================
+
+function ambilSemuaKategori() {
+
     return db.prepare(`
-        SELECT * FROM categories
+        SELECT
+            id,
+            nama_kategori,
+            created_at
+        FROM categories
         ORDER BY id DESC
     `).all();
+
 }
 
-function getCategoryById(id) {
+// ==================== AMBIL BERDASARKAN ID ====================
+
+function ambilKategoriById(id) {
+
     return db.prepare(`
-        SELECT * FROM categories
+        SELECT
+            id,
+            nama_kategori
+        FROM categories
         WHERE id = ?
     `).get(id);
+
 }
 
-function tambahCategory(nama_kategori) {
+// ==================== TAMBAH ====================
+
+function tambahKategori(nama_kategori) {
+
     return db.prepare(`
         INSERT INTO categories
-        (nama_kategori)
-        VALUES (?)
-    `).run(nama_kategori);
+        (
+            nama_kategori
+        )
+        VALUES
+        (
+            ?
+        )
+    `).run(
+        nama_kategori
+    );
+
 }
 
-function updateCategory(id, nama_kategori) {
+// ==================== UPDATE ====================
+
+function updateKategori(id, nama_kategori) {
+
     return db.prepare(`
         UPDATE categories
-        SET nama_kategori = ?
+        SET
+            nama_kategori = ?
         WHERE id = ?
-    `).run(nama_kategori, id);
+    `).run(
+        nama_kategori,
+        id
+    );
+
 }
 
-function hapusCategory(id) {
+// ==================== HAPUS ====================
+
+function hapusKategori(id) {
+
     return db.prepare(`
         DELETE FROM categories
         WHERE id = ?
     `).run(id);
+
 }
 
 module.exports = {
-    getAllCategory,
-    getCategoryById,
-    tambahCategory,
-    updateCategory,
-    hapusCategory
+    ambilSemuaKategori,
+    ambilKategoriById,
+    tambahKategori,
+    updateKategori,
+    hapusKategori
 };

@@ -1,0 +1,108 @@
+<h2 class="mb-4">
+
+    Transaksi Baru
+
+</h2>
+
+{{#if pesanError.length}}
+
+<div class="alert alert-danger">
+
+    <ul>
+
+        {{#each pesanError}}
+
+        <li>{{this}}</li>
+
+        {{/each}}
+
+    </ul>
+
+</div>
+
+{{/if}}
+
+<form action="/transaction/create" method="POST">
+
+    <table class="table table-bordered">
+
+        <thead class="table-secondary">
+
+            <tr>
+
+                <th>Produk</th>
+
+                <th>Harga</th>
+
+                <th>Stok</th>
+
+                <th>Jumlah</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {{#each products}}
+
+            <tr>
+
+                <td>
+
+                    <input
+                        type="checkbox"
+                        name="product_id"
+                        value="{{id}}">
+
+                    {{nama_produk}}
+
+                </td>
+
+                <td>
+
+                    Rp {{harga}}
+
+                </td>
+
+                <td>
+
+                    {{stok}}
+
+                </td>
+
+                <td>
+
+                    <input
+                        type="number"
+                        name="qty"
+                        class="form-control"
+                        min="1"
+                        value="1">
+
+                </td>
+
+            </tr>
+
+            {{/each}}
+
+        </tbody>
+
+    </table>
+
+    <button
+        class="btn btn-success">
+
+        Simpan Transaksi
+
+    </button>
+
+    <a
+        href="/transaction/list"
+        class="btn btn-secondary">
+
+        Batal
+
+    </a>
+
+</form>

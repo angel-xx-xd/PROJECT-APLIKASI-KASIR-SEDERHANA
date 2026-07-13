@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Data Pembayaran</h2>
+
+    <a href="/payment/create" class="btn btn-primary">
+
+        Pembayaran Baru
+
+    </a>
+
+</div>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>No</th>
+
+            <th>Metode</th>
+
+            <th>Total</th>
+
+            <th>Bayar</th>
+
+            <th>Kembalian</th>
+
+            <th>Waktu</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {{#each payments}}
+
+        <tr>
+
+            <td>{{inc @index}}</td>
+
+            <td>{{metode_pembayaran}}</td>
+
+            <td>Rp {{total}}</td>
+
+            <td>Rp {{jumlah_bayar}}</td>
+
+            <td>Rp {{kembalian}}</td>
+
+            <td>{{waktu_pembayaran}}</td>
+
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+
+</table>
