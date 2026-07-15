@@ -54,6 +54,7 @@ function create(req, res) {
     if (pesanError.length > 0) {
 
         return res.render("pages/category/create", {
+            title: "Tambah Kategori",
             pesanError,
             formData: {
                 nama_kategori
@@ -64,7 +65,7 @@ function create(req, res) {
 
     Category.tambahKategori(nama_kategori);
 
-    res.redirect("/category/list");
+    res.redirect("/kategori/list");
 
 }
 
@@ -94,6 +95,7 @@ function edit(req, res) {
     if (pesanError.length > 0) {
 
         return res.render("pages/category/edit", {
+            title: "Edit Kategori",
             pesanError,
             category: {
                 id: req.params.id,
@@ -108,7 +110,7 @@ function edit(req, res) {
         nama_kategori
     );
 
-    res.redirect("/category/list");
+    res.redirect("/kategori/list");
 
 }
 
@@ -118,7 +120,7 @@ function hapus(req, res) {
 
     Category.hapusKategori(req.params.id);
 
-    res.redirect("/category/list");
+    res.redirect("/kategori/list");
 
 }
 

@@ -1,109 +1,100 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!DOCTYPE html>
+<html lang="id">
 
-    <div class="container">
+<head>
 
-        <a class="navbar-brand" href="/">
-            Aplikasi Kasir
-        </a>
+    <meta charset="UTF-8">
 
-        {{#if session.user_id}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbar">
+    <title>Aplikasi Kasir</title>
 
-            <span class="navbar-toggler-icon"></span>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 
-        </button>
+</head>
 
-        <div
-            class="collapse navbar-collapse"
-            id="navbar">
+<body>
 
-            <ul class="navbar-nav me-auto">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                <li class="nav-item">
+        <div class="container">
 
-                    <a
-                        class="nav-link"
-                        href="/">
+            <a class="navbar-brand" href="/">
 
-                        Dashboard
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="/category/list">
-
-                        Kategori
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="/product/list">
-
-                        Produk
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="/transaction/list">
-
-                        Transaksi
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-
-                    <a
-                        class="nav-link"
-                        href="/payment/list">
-
-                        Pembayaran
-
-                    </a>
-
-                </li>
-
-            </ul>
-
-            <span class="navbar-text me-3">
-
-                {{session.nama}}
-
-            </span>
-
-            <a
-                href="/auth/logout"
-                class="btn btn-danger btn-sm">
-
-                Logout
+                Aplikasi Kasir
 
             </a>
 
+            {{#if session.user_id}}
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbar">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbar">
+
+                <ul class="navbar-nav me-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Dashboard</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/kategori/list">Kategori</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/produk/list">Produk</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/transaksi/list">Transaksi</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pembayaran/list">Pembayaran</a>
+                    </li>
+
+                </ul>
+
+                <span class="navbar-text me-3">
+
+                    {{session.nama}}
+
+                </span>
+
+                <a
+                    href="/auth/logout"
+                    class="btn btn-danger btn-sm">
+
+                    Logout
+
+                </a>
+
+            </div>
+
+            {{/if}}
+
         </div>
 
-        {{/if}}
+    </nav>
+
+    <div class="container mt-4">
+
+        {{{body}}}
 
     </div>
 
-</nav>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
