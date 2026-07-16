@@ -24,7 +24,7 @@ function list(req, res) {
 
     const categories = Category.ambilSemuaKategori();
 
-    res.render("pages/category/list", {
+    res.render("pages/categories/list", {
         title: "Kategori",
         categories
     });
@@ -35,7 +35,7 @@ function list(req, res) {
 
 function showCreateForm(req, res) {
 
-    res.render("pages/category/create", {
+    res.render("pages/categories/create", {
         title: "Tambah Kategori",
         formData: {},
         pesanError: []
@@ -53,7 +53,7 @@ function create(req, res) {
 
     if (pesanError.length > 0) {
 
-        return res.render("pages/category/create", {
+        return res.render("pages/categories/create", {
             title: "Tambah Kategori",
             pesanError,
             formData: {
@@ -75,7 +75,7 @@ function showEditForm(req, res) {
 
     const category = Category.ambilKategoriById(req.params.id);
 
-    res.render("pages/category/edit", {
+    res.render("pages/categories/edit", {
         title: "Edit Kategori",
         category,
         pesanError: [],
@@ -94,7 +94,7 @@ function edit(req, res) {
 
     if (pesanError.length > 0) {
 
-        return res.render("pages/category/edit", {
+        return res.render("pages/categories/edit", {
             title: "Edit Kategori",
             pesanError,
             category: {

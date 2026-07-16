@@ -1,40 +1,54 @@
 const db = require("../database/config");
 
-// ==================== DASHBOARD ====================
+// ==================== TOTAL USER ====================
 
 function totalUser() {
 
-    return db.prepare(`
+    const result = db.prepare(`
         SELECT COUNT(*) AS total
         FROM users
-    `).get().total;
+    `).get();
+
+    return result.total;
 
 }
+
+// ==================== TOTAL KATEGORI ====================
 
 function totalKategori() {
 
-    return db.prepare(`
+    const result = db.prepare(`
         SELECT COUNT(*) AS total
         FROM categories
-    `).get().total;
+    `).get();
+
+    return result.total;
 
 }
+
+// ==================== TOTAL PRODUK ====================
 
 function totalProduk() {
 
-    return db.prepare(`
+    const result = db.prepare(`
         SELECT COUNT(*) AS total
         FROM products
-    `).get().total;
+    `).get();
+
+    return result.total;
 
 }
 
+// ==================== TOTAL TRANSAKSI ====================
+
 function totalTransaksi() {
 
-    return db.prepare(`
+    const result = db.prepare(`
         SELECT COUNT(*) AS total
         FROM transactions
-    `).get().total;
+    `).get();
+
+    return result.total;
 
 }
 

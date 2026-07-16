@@ -1,6 +1,3 @@
-const bcrypt = require("bcrypt");
-const User = require("../models/User");
-
 // ==========================
 // MENAMPILKAN FORM LOGIN
 // ==========================
@@ -47,23 +44,14 @@ function handleLogin(req, res) {
         });
     }
 
-    const user = User.ambilUserByEmail(email);
+    // ==========================
+    // LOGIN MANUAL
+    // ==========================
 
-    if (!user) {
+    const ADMIN_EMAIL = "admin@gmail.com";
+    const ADMIN_PASSWORD = "admin123";
 
-        return res.render("pages/auth/login", {
-            title: "Login",
-            pesanError: ["Email atau Password salah"],
-            formData: {
-                email
-            }
-        });
-
-    }
-
-    const cocok = bcrypt.compareSync(password, user.password);
-
-    if (!cocok) {
+    if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
 
         return res.render("pages/auth/login", {
             title: "Login",
@@ -75,10 +63,10 @@ function handleLogin(req, res) {
 
     }
 
-    req.session.user_id = user.id;
-    req.session.nama = user.nama;
-    req.session.email = user.email;
-    req.session.role = user.role;
+    req.session.user_id = 1;
+    req.session.nama = "Administrator";
+    req.session.email = ADMIN_EMAIL;
+    req.session.role = "admin";
 
     return res.redirect("/");
 

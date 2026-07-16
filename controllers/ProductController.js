@@ -40,7 +40,7 @@ function list(req, res) {
 
     const products = Product.ambilSemuaProduk();
 
-    res.render("pages/product/list", {
+    res.render("pages/products/list", {
         title: "Produk",
         products
     });
@@ -53,7 +53,7 @@ function showCreateForm(req, res) {
 
     const categories = Product.ambilSemuaKategori();
 
-    res.render("pages/product/create", {
+    res.render("pages/products/create", {
         title: "Tambah Produk",
         categories,
         formData: {},
@@ -84,19 +84,16 @@ function create(req, res) {
 
         const categories = Product.ambilSemuaKategori();
 
-        return res.render("pages/product/create", {
-
-            pesanError,
-
+        return res.render("pages/products/create", {
+            title: "Tambah Produk",
             categories,
-
+            pesanError,
             formData: {
                 category_id,
                 nama_produk,
                 harga,
                 stok
             }
-
         });
 
     }
@@ -108,7 +105,7 @@ function create(req, res) {
         stok
     );
 
-    res.redirect("/product/list");
+    res.redirect("/produk/list");
 
 }
 
@@ -120,18 +117,11 @@ function showEditForm(req, res) {
 
     const categories = Product.ambilSemuaKategori();
 
-    res.render("pages/product/edit", {
-
+    res.render("pages/products/edit", {
         title: "Edit Produk",
-
         product,
-
         categories,
-
-        pesanError: [],
-
-        formData: {}
-
+        pesanError: []
     });
 
 }
@@ -158,45 +148,30 @@ function edit(req, res) {
 
         const categories = Product.ambilSemuaKategori();
 
-        return res.render("pages/product/edit", {
-
+        return res.render("pages/products/edit", {
+            title: "Edit Produk",
             categories,
-
             pesanError,
-
             product: {
-
                 id: req.params.id,
-
                 category_id,
-
                 nama_produk,
-
                 harga,
-
                 stok
-
             }
-
         });
 
     }
 
     Product.updateProduk(
-
         req.params.id,
-
         category_id,
-
         nama_produk,
-
         harga,
-
         stok
-
     );
 
-    res.redirect("/product/list");
+    res.redirect("/produk/list");
 
 }
 
@@ -206,22 +181,15 @@ function hapus(req, res) {
 
     Product.hapusProduk(req.params.id);
 
-    res.redirect("/product/list");
+    res.redirect("/produk/list");
 
 }
 
 module.exports = {
-
     list,
-
     showCreateForm,
-
     create,
-
     showEditForm,
-
     edit,
-
     hapus
-
 };

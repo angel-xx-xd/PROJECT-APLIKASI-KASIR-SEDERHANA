@@ -49,7 +49,20 @@ app.engine(
     engine({
         extname: ".hbs",
         defaultLayout: "main",
-        layoutsDir: path.join(__dirname, "views/layouts")
+        layoutsDir: path.join(__dirname, "views/layouts"),
+
+        helpers: {
+
+            inc(value) {
+                return value + 1;
+            },
+
+            eq(a, b) {
+                return a === b;
+            }
+
+        }
+
     })
 );
 
@@ -109,8 +122,13 @@ app.use((req, res) => {
 // ======================
 
 app.use((err, req, res, next) => {
+    console.error("ERROR:");
     console.error(err);
-    res.status(500).send("Terjadi kesalahan pada server.");
+
+    res.status(500).send(`
+        <h2>Terjadi Kesalahan</h2>
+        <pre>${err.stack}</pre>
+    `);
 });
 
 // ======================
