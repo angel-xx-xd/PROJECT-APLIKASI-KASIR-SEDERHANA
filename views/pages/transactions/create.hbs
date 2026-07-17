@@ -1,8 +1,4 @@
-<h2 class="mb-4">
-
-    Transaksi Baru
-
-</h2>
+<h2 class="mb-4">Transaksi Baru</h2>
 
 {{#if pesanError.length}}
 
@@ -22,22 +18,18 @@
 
 {{/if}}
 
-<form action="/transaction/create" method="POST">
+<form action="/transaksi/create" method="POST">
 
     <table class="table table-bordered">
 
         <thead class="table-secondary">
 
             <tr>
-
+                <th>Pilih</th>
                 <th>Produk</th>
-
                 <th>Harga</th>
-
                 <th>Stok</th>
-
                 <th>Jumlah</th>
-
             </tr>
 
         </thead>
@@ -49,27 +41,17 @@
             <tr>
 
                 <td>
-
                     <input
                         type="checkbox"
                         name="product_id"
                         value="{{id}}">
-
-                    {{nama_produk}}
-
                 </td>
 
-                <td>
+                <td>{{nama_produk}}</td>
 
-                    Rp {{harga}}
+                <td>Rp {{harga}}</td>
 
-                </td>
-
-                <td>
-
-                    {{stok}}
-
-                </td>
+                <td>{{stok}}</td>
 
                 <td>
 
@@ -90,19 +72,12 @@
 
     </table>
 
-    <button
-        class="btn btn-success">
-
+    <button class="btn btn-success">
         Simpan Transaksi
-
     </button>
 
-    <a
-        href="/transaction/list"
-        class="btn btn-secondary">
-
+    <a href="/transaksi/list" class="btn btn-secondary">
         Batal
-
     </a>
 
 </form>

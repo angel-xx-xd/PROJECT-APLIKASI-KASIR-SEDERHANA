@@ -1,35 +1,22 @@
-<h2 class="mb-4">
-
-    Detail Transaksi
-
-</h2>
+<h2 class="mb-4">Detail Transaksi</h2>
 
 <div class="card mb-3">
 
     <div class="card-body">
 
         <p>
-
             <strong>ID Transaksi :</strong>
-
             {{transaksi.id}}
-
         </p>
 
         <p>
-
             <strong>Tanggal :</strong>
-
             {{transaksi.tanggal}}
-
         </p>
 
         <p>
-
             <strong>Kasir :</strong>
-
             {{transaksi.nama}}
-
         </p>
 
     </div>
@@ -41,17 +28,11 @@
     <thead class="table-dark">
 
         <tr>
-
             <th>No</th>
-
             <th>Produk</th>
-
             <th>Harga</th>
-
             <th>Qty</th>
-
             <th>Subtotal</th>
-
         </tr>
 
     </thead>
@@ -63,13 +44,9 @@
         <tr>
 
             <td>{{inc @index}}</td>
-
             <td>{{nama_produk}}</td>
-
             <td>Rp {{harga}}</td>
-
             <td>{{qty}}</td>
-
             <td>Rp {{subtotal}}</td>
 
         </tr>
@@ -82,20 +59,10 @@
 
 <div class="text-end mt-3">
 
-    <h4>
-
-        Total :
-
-        Rp {{transaksi.total}}
-
-    </h4>
+    <h4>Total : Rp {{transaksi.total}}</h4>
 
 </div>
 
-<a
-    href="/transaction/list"
-    class="btn btn-secondary">
-
+<a href="/transaksi/list" class="btn btn-secondary">
     Kembali
-
 </a>

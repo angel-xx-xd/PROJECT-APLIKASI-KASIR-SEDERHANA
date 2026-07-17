@@ -58,7 +58,13 @@ app.engine(
             },
 
             eq(a, b) {
-                return a === b;
+                return a == b;
+            },
+
+            isSelected(a, b) {
+                return Number(a) === Number(b)
+                    ? "selected"
+                    : "";
             }
 
         }
@@ -85,19 +91,18 @@ app.use(express.static(path.join(__dirname, "public")));
 // ======================
 
 app.use((req, res, next) => {
+
     res.locals.session = req.session;
+
     next();
+
 });
 
 // ======================
 // Dashboard
 // ======================
 
-app.get(
-    "/",
-    isAuthenticated,
-    DashboardController.index
-);
+app.get("/", isAuthenticated, DashboardController.index);
 
 // ======================
 // Routes
@@ -114,7 +119,9 @@ app.use("/pembayaran", paymentRoutes);
 // ======================
 
 app.use((req, res) => {
+
     res.status(404).send("404 | Halaman tidak ditemukan");
+
 });
 
 // ======================
@@ -122,13 +129,15 @@ app.use((req, res) => {
 // ======================
 
 app.use((err, req, res, next) => {
-    console.error("ERROR:");
+
+    console.error("========== ERROR ==========");
     console.error(err);
 
     res.status(500).send(`
         <h2>Terjadi Kesalahan</h2>
         <pre>${err.stack}</pre>
     `);
+
 });
 
 // ======================
@@ -138,5 +147,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+
     console.log(`Server berjalan di http://localhost:${PORT}`);
+
 });

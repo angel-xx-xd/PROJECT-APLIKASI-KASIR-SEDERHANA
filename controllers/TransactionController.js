@@ -6,7 +6,7 @@ function list(req, res) {
 
     const transactions = Transaction.ambilSemuaTransaksi();
 
-    res.render("pages/transaction/list", {
+    res.render("pages/transactions/list", {
         title: "Data Transaksi",
         transactions
     });
@@ -19,7 +19,7 @@ function showCreateForm(req, res) {
 
     const products = Transaction.ambilSemuaProduk();
 
-    res.render("pages/transaction/create", {
+    res.render("pages/transactions/create", {
         title: "Transaksi Baru",
         products,
         pesanError: [],
@@ -36,6 +36,10 @@ function create(req, res) {
 
     const pesanError = [];
 
+    if (!product_id) {
+        product_id = [];
+    }
+
     if (!Array.isArray(product_id)) {
         product_id = [product_id];
     }
@@ -44,12 +48,7 @@ function create(req, res) {
         qty = [qty];
     }
 
-    if (product_id.length === 0) {
-        pesanError.push("Produk belum dipilih");
-    }
-
     let total = 0;
-
     const detail = [];
 
     for (let i = 0; i < product_id.length; i++) {
@@ -57,16 +56,10 @@ function create(req, res) {
         const produk = Transaction.ambilProdukById(product_id[i]);
 
         if (!produk) {
-            pesanError.push("Produk tidak ditemukan");
             continue;
         }
 
         const jumlah = parseInt(qty[i]);
-
-        if (isNaN(jumlah) || jumlah <= 0) {
-            pesanError.push("Jumlah produk tidak valid");
-            continue;
-        }
 
         if (jumlah > produk.stok) {
             pesanError.push(`Stok ${produk.nama_produk} tidak mencukupi`);
@@ -87,18 +80,24 @@ function create(req, res) {
 
     if (pesanError.length > 0) {
 
-        const products = Transaction.ambilSemuaProduk();
-
-        return res.render("pages/transaction/create", {
+        return res.render("pages/transactions/create", {
             title: "Transaksi Baru",
-            products,
+            products: Transaction.ambilSemuaProduk(),
             pesanError
         });
 
     }
 
+    // ==========================
+    // DEBUG SESSION
+    // ==========================
+
+    console.log("SESSION :", req.session);
+    console.log("USER ID :", req.session.user_id);
+
+    // Sementara gunakan user id = 1
     const transaksiId = Transaction.tambahTransaksi(
-        req.session.user_id,
+        1,
         total
     );
 
@@ -133,7 +132,7 @@ function detail(req, res) {
     const detail = Transaction
         .ambilDetailTransaksi(req.params.id);
 
-    res.render("pages/transaction/detail", {
+    res.render("pages/transactions/detail", {
         title: "Detail Transaksi",
         transaksi,
         detail

@@ -6,7 +6,7 @@ function list(req, res) {
 
     const payments = Payment.ambilSemuaPembayaran();
 
-    res.render("pages/payment/list", {
+    res.render("pages/payments/list", {
         title: "Data Pembayaran",
         payments
     });
@@ -19,7 +19,7 @@ function showCreateForm(req, res) {
 
     const transaksi = Payment.ambilTransaksiBelumDibayar();
 
-    res.render("pages/payment/create", {
+    res.render("pages/payments/create", {
         title: "Pembayaran",
         transaksi,
         pesanError: []
@@ -45,13 +45,16 @@ function create(req, res) {
         pesanError.push("Transaksi tidak ditemukan");
     }
 
-    if (transaksi && (!jumlah_bayar || Number(jumlah_bayar) < transaksi.total)) {
+    if (
+        transaksi &&
+        (!jumlah_bayar || Number(jumlah_bayar) < Number(transaksi.total))
+    ) {
         pesanError.push("Uang pembayaran kurang");
     }
 
     if (pesanError.length > 0) {
 
-        return res.render("pages/payment/create", {
+        return res.render("pages/payments/create", {
             title: "Pembayaran",
             transaksi: Payment.ambilTransaksiBelumDibayar(),
             pesanError

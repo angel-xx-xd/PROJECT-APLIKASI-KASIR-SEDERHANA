@@ -2,7 +2,7 @@
 
     <h1>Data Produk</h1>
 
-    <a href="/product/create" class="btn btn-primary">
+    <a href="/produk/create" class="btn btn-primary">
         Tambah Produk
     </a>
 
@@ -11,23 +11,14 @@
 <table class="table table-bordered table-striped">
 
     <thead class="table-dark">
-
         <tr>
-
             <th width="60">No</th>
-
             <th>Kategori</th>
-
             <th>Nama Produk</th>
-
             <th>Harga</th>
-
             <th>Stok</th>
-
             <th width="170">Aksi</th>
-
         </tr>
-
     </thead>
 
     <tbody>
@@ -37,27 +28,19 @@
         <tr>
 
             <td>{{inc @index}}</td>
-
             <td>{{nama_kategori}}</td>
-
             <td>{{nama_produk}}</td>
-
             <td>Rp {{harga}}</td>
-
             <td>{{stok}}</td>
 
             <td>
 
-                <a href="/product/edit/{{id}}" class="btn btn-warning btn-sm">
-
+                <a href="/produk/edit/{{id}}" class="btn btn-warning btn-sm">
                     Edit
-
                 </a>
 
-                <a href="/product/delete/{{id}}"
-
+                <a href="/produk/delete/{{id}}"
                     class="btn btn-danger btn-sm"
-
                     onclick="return confirm('Yakin ingin menghapus produk ini?')">
 
                     Hapus
