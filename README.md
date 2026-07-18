@@ -1,21 +1,91 @@
-# Aplikasi Kasir Sederhana Berbasis Web
+# Sistem Kasir Sederhana Berbasis Web
 
 ## Nama Mahasiswa
 Angela Anastasya Zagoto
 
 ## Judul Project
-Aplikasi Kasir Sederhana Berbasis Web
+Sistem Kasir Sederhana Berbasis Web
 
-## Deskripsi Singkat
-Aplikasi Kasir Sederhana Berbasis Web merupakan aplikasi yang digunakan untuk membantu proses transaksi penjualan secara digital. Sistem ini memungkinkan admin atau kasir mengelola data produk, melakukan transaksi penjualan, menghitung total pembayaran secara otomatis, serta menyimpan data transaksi ke dalam database.
+## Deskripsi
+Aplikasi web yang digunakan untuk membantu proses transaksi penjualan pada sebuah toko.
 
-## Penjelasan Singkat Database
+Fitur yang tersedia:
 
-Database pada aplikasi ini terdiri dari 6 tabel, yaitu:
+- Login Admin
+- Dashboard
+- CRUD Kategori
+- CRUD Produk
+- Transaksi Penjualan
+- Pembayaran
+- Detail Transaksi
+- Validasi Input
 
-- **users** : Menyimpan data admin dan kasir.
-- **categories** : Menyimpan kategori produk.
-- **products** : Menyimpan data produk yang dijual.
-- **transactions** : Menyimpan data transaksi penjualan.
-- **transaction_details** : Menyimpan detail produk pada setiap transaksi.
-- **payments** : Menyimpan data pembayaran transaksi.
+## Teknologi
+
+- Node.js
+- Express.js
+- SQLite
+- Express Handlebars
+- Bootstrap 5
+
+## Cara Menjalankan
+
+1. Clone Repository
+
+```
+git clone https://github.com/angel-xx-xd/PROJECT-APLIKASI-KASIR-SEDERHANA.git
+```
+
+2. Install Dependency
+
+```
+npm install
+```
+
+3. Jalankan aplikasi
+
+```
+npm start
+```
+
+atau
+
+```
+npm run dev
+```
+
+4. Buka browser
+
+```
+http://localhost:3000
+```
+
+## Akun Login
+
+### Admin
+
+Email
+
+```
+admin@gmail.com
+```
+
+Password
+
+```
+admin123
+```
+
+### Admin 2
+
+Email
+
+```
+kasir@gmail.com
+```
+
+Password
+
+```
+kasir123
+```
