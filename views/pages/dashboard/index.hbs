@@ -1,16 +1,18 @@
 <h2 class="mb-4">
-    Dashboard Aplikasi Kasir
+
+    Dashboard Kasir
+
 </h2>
 
 <div class="row">
 
-    <div class="col-md-3">
+    <div class="col-md-2">
 
-        <div class="card text-bg-primary mb-3">
+        <div class="card text-bg-primary mb-3 shadow">
 
-            <div class="card-body">
+            <div class="card-body text-center">
 
-                <h5>Total User</h5>
+                <h6>Total User</h6>
 
                 <h2>{{totalUser}}</h2>
 
@@ -20,13 +22,13 @@
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
 
-        <div class="card text-bg-success mb-3">
+        <div class="card text-bg-success mb-3 shadow">
 
-            <div class="card-body">
+            <div class="card-body text-center">
 
-                <h5>Total Kategori</h5>
+                <h6>Kategori</h6>
 
                 <h2>{{totalKategori}}</h2>
 
@@ -36,13 +38,13 @@
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-2">
 
-        <div class="card text-bg-warning mb-3">
+        <div class="card text-bg-warning mb-3 shadow">
 
-            <div class="card-body">
+            <div class="card-body text-center">
 
-                <h5>Total Produk</h5>
+                <h6>Produk</h6>
 
                 <h2>{{totalProduk}}</h2>
 
@@ -54,11 +56,11 @@
 
     <div class="col-md-3">
 
-        <div class="card text-bg-danger mb-3">
+        <div class="card text-bg-danger mb-3 shadow">
 
-            <div class="card-body">
+            <div class="card-body text-center">
 
-                <h5>Total Transaksi</h5>
+                <h6>Transaksi</h6>
 
                 <h2>{{totalTransaksi}}</h2>
 
@@ -68,31 +70,219 @@
 
     </div>
 
+    <div class="col-md-3">
+
+        <div class="card text-bg-dark mb-3 shadow">
+
+            <div class="card-body text-center">
+
+                <h6>Pembayaran</h6>
+
+                <h2>{{totalPembayaran}}</h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div class="card mt-4">
+<div class="alert alert-info">
 
-    <div class="card-header">
+    <h5>Halo, {{session.nama}} 👋</h5>
 
-        Selamat Datang
+    Selamat datang di Sistem Kasir.
+
+</div>
+
+<!-- ==================== PRODUK ==================== -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+
+            Produk Terbaru
+
+        </h5>
 
     </div>
 
     <div class="card-body">
 
-        <h5>Halo, {{session.nama}}</h5>
+        <table class="table table-bordered table-hover">
 
-        <p>
+            <thead class="table-light">
 
-            Selamat datang di Aplikasi Kasir Sederhana.
+                <tr>
 
-        </p>
+                    <th>No</th>
 
-        <p>
+                    <th>Kategori</th>
 
-            Gunakan menu di atas untuk mengelola kategori, produk, transaksi, dan pembayaran.
+                    <th>Produk</th>
 
-        </p>
+                    <th>Harga</th>
+
+                    <th>Stok</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {{#each produkTerbaru}}
+
+                <tr>
+
+                    <td>{{inc @index}}</td>
+
+                    <td>{{nama_kategori}}</td>
+
+                    <td>{{nama_produk}}</td>
+
+                    <td>Rp {{harga}}</td>
+
+                    <td>{{stok}}</td>
+
+                </tr>
+
+                {{/each}}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ==================== TRANSAKSI ==================== -->
+
+<div class="card shadow mb-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h5 class="mb-0">
+
+            Transaksi Terbaru
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-light">
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Kasir</th>
+
+                    <th>Tanggal</th>
+
+                    <th>Total</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {{#each transaksiTerbaru}}
+
+                <tr>
+
+                    <td>{{inc @index}}</td>
+
+                    <td>{{nama}}</td>
+
+                    <td>{{tanggal}}</td>
+
+                    <td>Rp {{total}}</td>
+
+                </tr>
+
+                {{/each}}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ==================== PEMBAYARAN ==================== -->
+
+<div class="card shadow">
+
+    <div class="card-header bg-dark text-white">
+
+        <h5 class="mb-0">
+
+            Pembayaran Terbaru
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-light">
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Metode</th>
+
+                    <th>Total</th>
+
+                    <th>Bayar</th>
+
+                    <th>Kembalian</th>
+
+                    <th>Waktu</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {{#each pembayaranTerbaru}}
+
+                <tr>
+
+                    <td>{{inc @index}}</td>
+
+                    <td>{{metode_pembayaran}}</td>
+
+                    <td>Rp {{total}}</td>
+
+                    <td>Rp {{jumlah_bayar}}</td>
+
+                    <td>Rp {{kembalian}}</td>
+
+                    <td>{{waktu_pembayaran}}</td>
+
+                </tr>
+
+                {{/each}}
+
+            </tbody>
+
+        </table>
 
     </div>
 

@@ -92,15 +92,16 @@ function create(req, res) {
     // DEBUG SESSION
     // ==========================
 
-    console.log("SESSION :", req.session);
-    console.log("USER ID :", req.session.user_id);
+    if (!req.session.user_id) {
 
-    // Sementara gunakan user id = 1
-    const transaksiId = Transaction.tambahTransaksi(
-        1,
-        total
-    );
+    return res.redirect("/auth/login");
 
+    }
+
+     const transaksiId = Transaction.tambahTransaksi(
+     req.session.user_id,
+     total
+);
     detail.forEach(item => {
 
         Transaction.tambahDetail(

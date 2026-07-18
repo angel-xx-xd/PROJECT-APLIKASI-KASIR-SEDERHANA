@@ -72,3 +72,73 @@ CREATE TABLE IF NOT EXISTS payments (
 `).run();
 
 console.log("Database berhasil dibuat.");
+
+// ======================
+// ADMIN DEFAULT 1
+// ======================
+
+const admin1 = db.prepare(`
+    SELECT *
+    FROM users
+    WHERE email = ?
+`).get("admin@gmail.com");
+
+if (!admin1) {
+
+    db.prepare(`
+        INSERT INTO users
+        (
+            nama,
+            email,
+            password,
+            role
+        )
+        VALUES
+        (
+            ?, ?, ?, ?
+        )
+    `).run(
+        "Administrator",
+        "admin@gmail.com",
+        "admin123",
+        "admin"
+    );
+
+    console.log("Admin 1 berhasil dibuat.");
+
+}
+
+// ======================
+// ADMIN DEFAULT 2
+// ======================
+
+const admin2 = db.prepare(`
+    SELECT *
+    FROM users
+    WHERE email = ?
+`).get("kasir@gmail.com");
+
+if (!admin2) {
+
+    db.prepare(`
+        INSERT INTO users
+        (
+            nama,
+            email,
+            password,
+            role
+        )
+        VALUES
+        (
+            ?, ?, ?, ?
+        )
+    `).run(
+        "Kasir",
+        "kasir@gmail.com",
+        "kasir123",
+        "admin"
+    );
+
+    console.log("Admin 2 berhasil dibuat.");
+
+}

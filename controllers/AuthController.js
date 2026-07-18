@@ -1,3 +1,5 @@
+const User = require("../models/User");
+
 // ==========================
 // MENAMPILKAN FORM LOGIN
 // ==========================
@@ -26,6 +28,7 @@ function handleLogin(req, res) {
 
     const pesanError = [];
 
+    // Validasi
     if (!email || email.trim() === "") {
         pesanError.push("Email tidak boleh kosong");
     }
@@ -35,6 +38,7 @@ function handleLogin(req, res) {
     }
 
     if (pesanError.length > 0) {
+
         return res.render("pages/auth/login", {
             title: "Login",
             pesanError,
@@ -42,20 +46,17 @@ function handleLogin(req, res) {
                 email
             }
         });
+
     }
 
-    // ==========================
-    // LOGIN MANUAL
-    // ==========================
+    // Cari user berdasarkan email
+    const user = User.ambilUserByEmail(email);
 
-    const ADMIN_EMAIL = "admin@gmail.com";
-    const ADMIN_PASSWORD = "admin123";
-
-    if (email !== ADMIN_EMAIL || password !== ADMIN_PASSWORD) {
+    if (!user) {
 
         return res.render("pages/auth/login", {
             title: "Login",
-            pesanError: ["Email atau Password salah"],
+            pesanError: ["Email tidak ditemukan"],
             formData: {
                 email
             }
@@ -63,10 +64,24 @@ function handleLogin(req, res) {
 
     }
 
-    req.session.user_id = 1;
-    req.session.nama = "Administrator";
-    req.session.email = ADMIN_EMAIL;
-    req.session.role = "admin";
+    // Cek password
+    if (user.password !== password) {
+
+        return res.render("pages/auth/login", {
+            title: "Login",
+            pesanError: ["Password salah"],
+            formData: {
+                email
+            }
+        });
+
+    }
+
+    // Simpan session
+    req.session.user_id = user.id;
+    req.session.nama = user.nama;
+    req.session.email = user.email;
+    req.session.role = user.role;
 
     return res.redirect("/");
 

@@ -10,6 +10,14 @@ function index(req, res) {
 
     const totalTransaksi = Dashboard.totalTransaksi();
 
+    const totalPembayaran = Dashboard.totalPembayaran();
+
+    const produkTerbaru = Dashboard.produkTerbaru();
+
+    const transaksiTerbaru = Dashboard.transaksiTerbaru();
+
+    const pembayaranTerbaru = Dashboard.pembayaranTerbaru();
+
     res.render("pages/dashboard/index", {
 
         title: "Dashboard",
@@ -20,7 +28,15 @@ function index(req, res) {
 
         totalProduk,
 
-        totalTransaksi
+        totalTransaksi,
+
+        totalPembayaran,
+
+        produkTerbaru,
+
+        transaksiTerbaru,
+
+        pembayaranTerbaru
 
     });
 
